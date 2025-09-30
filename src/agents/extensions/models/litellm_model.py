@@ -4,7 +4,7 @@ import json
 import time
 from collections.abc import AsyncIterator
 from copy import copy
-from typing import Any, Literal, cast, overload
+from typing import Any, Literal, Union, cast, overload
 
 from openai.types.responses.response_usage import InputTokensDetails, OutputTokensDetails
 
@@ -373,7 +373,7 @@ class LitellmModel(Model):
             model=self.model,
             object="response",
             output=[],
-            tool_choice=cast(Literal["auto", "required", "none"], tool_choice)
+            tool_choice=cast(Union[Literal["auto", "required", "none"], str], tool_choice)
             if tool_choice != NOT_GIVEN
             else "auto",
             top_p=model_settings.top_p,
